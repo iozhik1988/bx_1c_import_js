@@ -109,7 +109,8 @@ $(document).ready(function() {
                     }
                 }
     }*/
-    function importquery(url,login,pass) {
+    function importquery(url,login,pass) // Функция отправки запроса
+    {
             var import_1c = new XMLHttpRequest();
             console.log(url+' '+login+' '+pass);
             import_1c.open('GET', url, false, login, pass);
