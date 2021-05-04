@@ -73,42 +73,6 @@ $(document).ready(function() {
                 bxFormimport1c();});
     document.getElementById('domain').value=document.location.hostname;
 
- /* function query1c() {
-                var login = '';//document.getElementById('login').value;
-                var password = '';//document.getElementById('password').value;
-                var filename = document.getElementById('filename').value;
-                var log = document.getElementsByClassName('logimport')[0];
-                var domain = document.getElementById('domain').value;
-                alert(login + ' ' + password + ' ' + domain);
-                log.innerHTML += "<b>Импорт " + filename + "</b><hr>";
-                var import_1c = new XMLHttpRequest();
-                var auth_1c = new XMLHttpRequest();
-                let url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=catalog&mode=checkauth';
-                auth_1c.open('GET', url, [true, login, password]);
-                auth_1c.send();
-                auth_1c.onreadystatechange = function () {
-                    if (auth_1c.readyState == 4 && auth_1c.status == 0) {
-                        alert("Import is crashed!" + url);
-                    }
-
-                    if (auth_1c.readyState == 4 && auth_1c.status == 200) {
-                        alert(auth_1c.responseText);
-                        if ((auth_1c.responseText.substr(0, 8) != "progress") && (auth_1c.responseText.substr(0, 7) != "success") && (auth_1c.responseText.substr(0, 5) != "debug")) {
-                            alert("error");
-                        }
-
-                        if (auth_1c.responseText.substr(0, 7) == "success") {
-                            log.innerHTML += auth_1c.responseText;
-
-
-                           params = 'type=catalog&mode=import&' + import_1c.responseText.substr(import_1c.responseText.indexOf('sessid', 0), 40)) + ;
-                    import_1c.open("GET", document.location.protocol + '//' + document.location.hostname + '/bitrix/admin/1c_exchange.php?' + params, [true]);
-                    import_1c.send();
-
-                        }
-                    }
-                }
-    }*/
     function importquery(url,login,pass) // Функция отправки запроса
     {
             var import_1c = new XMLHttpRequest();
