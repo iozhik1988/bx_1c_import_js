@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BX1cimportHelp
 // @namespace    http://bitrix.ru/
-// @version      0.2
+// @version      0.3
 // @description  Помощник импорта xml файлов 1с
 // @downloadURL  https://drive.google.com/file/d/1IhIF_XG8ZhhZ8hlNDwhjwP55vnBFAHq7/view?usp=sharing
 // @author       Yury Smirnov
