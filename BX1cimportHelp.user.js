@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BX1cimportHelp
 // @namespace    http://bitrix.ru/
-// @version      0.3
+// @version      0.3.1
 // @description  Помощник импорта xml файлов 1с
 // @downloadURL  https://github.com/iozhik1988/bx_1c_import_js/blob/main/BX1cimportHelp.user.js
 // @author       Yury Smirnov
@@ -20,16 +20,17 @@ function addGlobalStyle(css) {
     head.appendChild(style);
 }
 
-addGlobalStyle('.BX1cimportHelp { position:fixed;bottom:40px;right:0px;font-size:24px;background:rgba(255,255,255,0.75);box-shadow: 0px 0px 5px black;padding:5px;border-radius:10px 0 0 0;z-index:99999999 }');
+addGlobalStyle('.BX1cimportHelp { cursor: pointer;position:fixed;bottom:40px;right:0px;font-size:24px;background:rgba(255,255,255,0.75);box-shadow: 0px 0px 5px black;padding:5px;border-radius:10px 0 0 0;z-index:99999999 }.BX1cimportHelp:hover:after{white-space:nowrap;background:#333;background:rgba(0,0,0,.8);border-radius:5px;bottom:35px;color:#fff;content:attr(title);right:0%;padding:5px 15px;position:absolute;z-index:98;width:auto;font-size:12px}.BX1cimportHelp:hover:before{border:solid;border-color:#333 transparent;border-width:6px 6px 0 6px;bottom:29px;content:"";left:25%;position:absolute;z-index:99}');
 addGlobalStyle('.bx1cimport {position: absolute;margin: 0 auto;width:1000px;height:800px;display:none;padding: 5px;border-color: black;border-style: solid;z-index:999999999;top: 0;left: 0;background-color: white;}');
 addGlobalStyle('.logimport {overflow: scroll;width: 600px;height: 600px;border-color: black;border-style: solid;}');
 addGlobalStyle('.managepanel {padding-left: 10px;}');
 addGlobalStyle('.managepanel>input {padding: 2px;margin: 2px;}');
 addGlobalStyle('.bx1cimportclose{#position: absolute;bottom: 15px;right: 15px;}');
 
-$(document).ready(function() {
+    $(document).ready(function() {
     var icon1cDiv = document.createElement('div');
     icon1cDiv.className = 'BX1cimportHelp';
+    icon1cDiv.title = 'Скрипт импорта xml 1C';
     icon1cDiv.textContent = '1c';
     document.body.append(icon1cDiv);
 
@@ -130,4 +131,5 @@ $(document).ready(function() {
 
  }
 
-})
+}
+)
