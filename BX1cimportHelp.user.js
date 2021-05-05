@@ -3,7 +3,7 @@
 // @namespace    http://bitrix.ru/
 // @version      0.3
 // @description  Помощник импорта xml файлов 1с
-// @downloadURL  https://raw.githubusercontent.com/iozhik1988/bx_1c_import_js/main/BX1cimportHelp.user.js#bypass=true
+// @downloadURL  https://github.com/iozhik1988/bx_1c_import_js/blob/main/BX1cimportHelp.user.js
 // @author       Yury Smirnov
 // @match        */bitrix/admin/*
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
