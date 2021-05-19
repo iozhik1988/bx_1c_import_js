@@ -102,7 +102,7 @@ addGlobalStyle('.bx1cimportclose{#position: absolute;bottom: 15px;right: 15px;}'
      var login = '';//document.getElementById('login').value;
      var password = '';//document.getElementById('password').value;
      var filename = document.getElementById('filename').value;
-     var importurl=location.protocol + domain + '/bitrix/admin/1c_exchange.php?type=catalog&mode=checkauth';
+     var importurl=location.protocol + '//'  + domain + '/bitrix/admin/1c_exchange.php?type=catalog&mode=checkauth';
      var log = document.getElementsByClassName('logimport')[0];
      var sessid1c;
      log.innerHTML += "Импорт файла" + filename + "<hr>";
