@@ -47,7 +47,7 @@ addGlobalStyle('.bx1cimportclose{#position: absolute;bottom: 15px;right: 15px;}'
     var managepanel = document.createElement('div');
     managepanel.className = 'managepanel';
     bx1cimport.append(managepanel);
-
+//$('.bx1cimport').append('<input class="bx1cimportclose" type="button" onclick="closeform()">Закрыть</input>');
     var bx1cimportclose = document.createElement('input');
     bx1cimportclose.className = 'bx1cimportclose';
     bx1cimportclose.type = 'button';
@@ -64,6 +64,9 @@ addGlobalStyle('.bx1cimportclose{#position: absolute;bottom: 15px;right: 15px;}'
     managepanel.append(importbutton);
     importbutton.onclick = function(){import1c();}
 
+    $('.managepanel').append('</br></br><button onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
+    $('.managepanel').append('</br></br><button onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
+        
     function bxFormimport1c() {
             document.getElementsByClassName('bx1cimport')[0].style.display = 'flex';
         }
