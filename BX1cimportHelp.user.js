@@ -47,13 +47,9 @@ addGlobalStyle('.bx1cimportclose{#position: absolute;bottom: 15px;right: 15px;}'
     var managepanel = document.createElement('div');
     managepanel.className = 'managepanel';
     bx1cimport.append(managepanel);
-//$('.bx1cimport').append('<input class="bx1cimportclose" type="button" onclick="closeform()">Закрыть</input>');
-    var bx1cimportclose = document.createElement('input');
-    bx1cimportclose.className = 'bx1cimportclose';
-    bx1cimportclose.type = 'button';
-    bx1cimportclose.value= 'Закрыть';
-    bx1cimport.append(bx1cimportclose);
-    bx1cimportclose.onclick = function(){closeform();}
+
+    $('.bx1cimport').append('<button id="closeform" class="bx1cimportclose">Закрыть</button>');
+    $('#closeform').bind( 'click', closeform );
 
     managepanel.innerHTML+='<input type="text" id="domain" value="nowhost()"><label>Домен</label><br>';
     managepanel.innerHTML+='<input type="text" id="filename"><lable for="filename">Файл импорта</lable><br>';
