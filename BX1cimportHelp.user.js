@@ -56,7 +56,7 @@ addGlobalStyle('.bx1cimportclose{#position: absolute;bottom: 15px;right: 15px;}'
     bx1cimportclose.onclick = function(){closeform();}
 
     managepanel.innerHTML+='<input type="text" id="domain" value="nowhost()"><label>Домен</label><br>';
-    managepanel.innerHTML+='<input type="text" id="filename"><lable for="filename">Файл мпорта</lable><br>';
+    managepanel.innerHTML+='<input type="text" id="filename"><lable for="filename">Файл импорта</lable><br>';
 
     var importbutton = document.createElement('input');
     importbutton.type = 'button';
