@@ -69,7 +69,7 @@ $(document).ready(function() {
     $('.managepanel').append('</br></br><button onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
 
     function bxFormimport1c() {
-        if(document.getElementsByClassName('bx1cimport')[0].style.display == 'none'){
+        if(document.getElementsByClassName('bx1cimport')[0].style.display !== 'block'){
         document.getElementsByClassName('bx1cimport')[0].style.display = 'block';
         dragElement(document.getElementsByClassName('bx1cimport')[0]);
         }
