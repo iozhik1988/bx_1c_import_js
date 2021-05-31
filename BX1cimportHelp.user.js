@@ -180,5 +180,40 @@ $(document).ready(function() {
 
     }
 
+   async function getorderxml1c() {
+        var domain = document.getElementById('domain').value;
+        var login = '';//document.getElementById('login').value;
+        var password = '';//document.getElementById('password').value;
+        var url=location.protocol + '//'  + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=checkauth';
+        var log = document.getElementsByClassName('logimport')[0];
+        var sessid1c;
+        log.innerHTML += "Получение xml заказа<hr>";
+        sessid1c=query(url,login,password);
+        await sleep(1000);
+        log.innerHTML += sessid1c+'<hr>';
+        if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
+            alert("error"); return;
+        }
+        sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
+        console.log(sessid1c);
+
+        url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=init&' + sessid1c + '&version=3.1';
+        console.log(url);
+        result = query(url, '', '');
+        await sleep(1000);
+        log.innerHTML += result + '<hr>';
+        console.log(result.substr(0, 8));
+        if (result.substr(0, 6) == "zip=no") {
+            log.innerHTML += result + '<hr>';
+            log.innerHTML += "Инициализация успешна" + '<hr>';
+            url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=query&' + sessid1c + '&version=3.1';
+            console.log(url);
+            result = query(url, '', '');
+            await sleep(1000);
+            log.innerHTML += result + '<hr>';
+        }
+        return;
+    }
+
 }
 )
