@@ -63,7 +63,7 @@ $(document).ready(function() {
     importbutton.type = 'button';
     importbutton.value= 'Импорт';
     managepanel.append(importbutton);
-    importbutton.onclick = function(){import1c();}
+    importbutton.onclick = function(){importprodxml1c();}
 
     $('.managepanel').append('</br></br><button onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
     $('.managepanel').append('</br></br><button onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
@@ -123,7 +123,7 @@ $(document).ready(function() {
             document.onmousemove = null;
         }
     }
-    function importquery(url,login,pass) // Функция отправки запроса
+    function query(url,login,pass) // Функция отправки запроса
     {
         var import_1c = new XMLHttpRequest();
         console.log(url+' '+login+' '+pass);
@@ -144,7 +144,7 @@ $(document).ready(function() {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    async function import1c() {
+    async function importprodxml1c() {
         var domain = document.getElementById('domain').value;
         var login = '';//document.getElementById('login').value;
         var password = '';//document.getElementById('password').value;
@@ -153,7 +153,7 @@ $(document).ready(function() {
         var log = document.getElementsByClassName('logimport')[0];
         var sessid1c;
         log.innerHTML += "Импорт файла" + filename + "<hr>";
-        sessid1c=importquery(importurl,login,password);
+        sessid1c=query(importurl,login,password);
         await sleep(1000);
         log.innerHTML += sessid1c+'<hr>';
         if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
@@ -164,7 +164,7 @@ $(document).ready(function() {
         let status=true;
         while (status) {
             url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=catalog&mode=import&' + sessid1c + '&filename=' + filename;
-            result = importquery(url, '', '');
+            result = query(url, '', '');
             await sleep(1000);
             log.innerHTML += result + '<hr>';
             console.log(result.substr(0, 8));
