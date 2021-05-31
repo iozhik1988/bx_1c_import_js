@@ -64,9 +64,14 @@ $(document).ready(function() {
     importbutton.value= 'Импорт';
     managepanel.append(importbutton);
     importbutton.onclick = function(){importprodxml1c();}
+    managepanel.innerHTML+='<hr>';
+    managepanel.innerHTML+='<label><strong>Получения xml заказов версии 3.1</strong></label><br><br>';
+    managepanel.innerHTML+='<input type="button" id="getorder" value="Получить xml"></br>';
+    $('#getorder').bind( 'click', getorderxml1c );
+    managepanel.innerHTML+='<hr>';
+    $('.managepanel').append('</br><button class="btn"  onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
+    $('.managepanel').append('</br></br><button class="btn"  onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
 
-    $('.managepanel').append('</br></br><button onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
-    $('.managepanel').append('</br></br><button onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
 
     function bxFormimport1c() {
         if(document.getElementsByClassName('bx1cimport')[0].style.display !== 'block'){
