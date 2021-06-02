@@ -219,7 +219,7 @@ $(document).ready(function() {
             console.log(url);
             result = query(url, '', '');
             await sleep(1000);
-            log.innerHTML += result + '<hr>';
+            log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
         }
         return;
     }
