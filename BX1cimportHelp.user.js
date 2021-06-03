@@ -154,7 +154,7 @@ $(document).ready(function() {
     }
 
     async function importprodxml1c() {
-        //log.innerHTML ='';
+        $("div.logimport").empty();
         var domain = document.getElementById('domain').value;
         var login = '';//document.getElementById('login').value;
         var password = '';//document.getElementById('password').value;
@@ -191,7 +191,7 @@ $(document).ready(function() {
     }
 
     async function getorderxml1c() {
-        //log.innerHTML ='';
+        $("div.logimport").empty();
         var domain = document.getElementById('domain').value;
         var login = '';//document.getElementById('login').value;
         var password = '';//document.getElementById('password').value;
@@ -227,7 +227,7 @@ $(document).ready(function() {
     }
     
         async function getprodxml1c() {
-        //log.innerHTML ='';
+        $("div.logimport").empty();
         var domain = document.getElementById('domain').value;
         var login = '';//document.getElementById('login').value;
         var password = '';//document.getElementById('password').value;
