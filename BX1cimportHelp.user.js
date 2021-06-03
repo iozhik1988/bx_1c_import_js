@@ -71,6 +71,8 @@ $(document).ready(function() {
     importbutton.onclick = function(){importprodxml1c();}
     $('.managepanel').append('<hr><label><strong>Получения xml заказов версии 3.1</strong></label><br><br><button class="btn2" id="getorder">Получить xml</button></br><hr>');
     $('#getorder').bind( 'click', getorderxml1c );
+    $('.managepanel').append('<hr><label><strong>Получения xml каталога товаров</strong></label><br><br><button class="btn2" id="getprod">Получить xml товаров</button></br><hr>');
+    $('#getprod').bind( 'click', getprodxml1c );
     $('.managepanel').append('</br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
     $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
 
@@ -222,6 +224,45 @@ $(document).ready(function() {
             log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
         }
         return;
+    }
+    
+        async function getprodxml1c() {
+        //log.innerHTML ='';
+        var domain = document.getElementById('domain').value;
+        var login = '';//document.getElementById('login').value;
+        var password = '';//document.getElementById('password').value;
+        var url=location.protocol + '//'  + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=checkauth';
+        var log = document.getElementsByClassName('logimport')[0];
+        var sessid1c;
+        log.innerHTML += "Получение xml каталога для выгрузки в 1С<hr>";
+        sessid1c=query(url,login,password);
+        await sleep(1000);
+        log.innerHTML += sessid1c+'<hr>';
+        if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
+            alert("error"); return;
+        }
+
+        url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=init';
+        console.log(url);
+        result = query(url, '', '');
+        await sleep(1000);
+        log.innerHTML += result + '<hr>';
+        console.log(result.substr(0, 8));
+        let status=true;
+        while (status) {
+            url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=query';
+            result = query(url, '', '');
+            await sleep(1000);
+            log.innerHTML += result + '<hr>';
+            console.log(result.substr(0, 8));
+            if ((result.substr(0, 17) == "С сайта выгружено")||(result.substr(0, 12) == "finished=yes")) {
+                if (result.indexOf("finished=yes", 0) !== -1) {
+                    status = false;
+                    console.log('end');
+                }
+            }
+            else {alert("error"); return;}
+        }
     }
 
 }
