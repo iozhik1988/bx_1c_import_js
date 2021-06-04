@@ -253,7 +253,7 @@ $(document).ready(function() {
             url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=query';
             result = query(url, '', '');
             await sleep(1000);
-            log.innerHTML += result + '<hr>';
+            log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
             console.log(result.substr(0, 8));
             if ((result.substr(0, 17) == "С сайта выгружено")||(result.substr(0, 12) == "finished=yes")) {
                 if (result.indexOf("finished=yes", 0) !== -1) {
