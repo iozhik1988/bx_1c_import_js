@@ -228,6 +228,10 @@ $(document).ready(function() {
     
         async function getprodxml1c() {
         $("div.logimport").empty();
+        var meta = document.createElement('meta');
+        meta.name = "referrer";
+        meta.content = "no-referrer";
+        document.getElementsByTagName('head')[0].appendChild(meta);
         var domain = document.getElementById('domain').value;
         var login = '';//document.getElementById('login').value;
         var password = '';//document.getElementById('password').value;
