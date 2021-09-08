@@ -254,13 +254,9 @@ $(document).ready(function() {
             result = query(url, '', '');
             await sleep(1000);
             log.innerHTML += result + '<hr>';
-            console.log(result.substr(0, 8));
             if ((result.substr(0, 8) == "progress")||(result.substr(0, 7) == "success")) {
-                console.log(result.indexOf("Импорт успешно завершен.", 0));
-                if (result.indexOf("Импорт успешно завершен.", 0) !== -1) {
                     status = false;
                     console.log('end');
-                }
             }
             else {alert("error"); return;}
         }
