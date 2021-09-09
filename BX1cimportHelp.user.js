@@ -78,7 +78,7 @@ $(document).ready(function() {
 
 
     function ajaximportxml(){
-    if (document.getElementById('filename').value.substr(0, 5) == "order"||document.getElementById('filename').value.substr(0, 11) == "contragents")
+if (document.getElementById('filename').value.substr(0, 5) == "order"||document.getElementById('filename').value.substr(0, 11) == "contragents"||document.getElementById('filename').value.substr(0, 9) == "documents")
     {importorderxml1c();}
     else {importprodxml1c();}}
 
