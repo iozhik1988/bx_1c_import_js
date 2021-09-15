@@ -76,7 +76,7 @@ $(document).ready(function() {
     $('.managepanel').append('</br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
     $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
 
-
+//определение типа импорта
     function ajaximportxml(){
 if (document.getElementById('filename').value.substr(0, 5) == "order"||document.getElementById('filename').value.substr(0, 11) == "contragents"||document.getElementById('filename').value.substr(0, 9) == "documents")
     {importorderxml1c();}
