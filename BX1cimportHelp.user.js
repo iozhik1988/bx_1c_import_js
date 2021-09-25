@@ -36,271 +36,329 @@ addGlobalStyle('.btn2 {background-color: #2196F3;border: none;color: white;paddi
 addGlobalStyle('.btn2:hover {background-color: RoyalBlue;}');
 
 $(document).ready(function() {
-    var icon1cDiv = document.createElement('div');
-    icon1cDiv.className = 'BX1cimportHelp';
-    icon1cDiv.title = 'Скрипт импорта xml 1C';
-    icon1cDiv.textContent = '';
-    document.body.append(icon1cDiv);
+        var icon1cDiv = document.createElement('div');
+        icon1cDiv.className = 'BX1cimportHelp';
+        icon1cDiv.title = 'Скрипт импорта xml 1C';
+        icon1cDiv.textContent = '';
+        document.body.append(icon1cDiv);
 
-    var bx1cimport = document.createElement('div');
-    bx1cimport.className = 'bx1cimport';
-    document.body.append(bx1cimport);
-    $('.bx1cimport').append('<div id="divheader">Скрипт отладки интеграции с 1C через xml</div>');
-    $('.bx1cimport').append('<button class="btn1" id="closeform"><i class="fa fa-close"></i></button>');
-    $('.bx1cimport').append('<div id="div1ccontent"style="display: flex">');
-    var logimport = document.createElement('div');
-    logimport.className = 'logimport';
-    $('#div1ccontent').append(logimport);
+        var bx1cimport = document.createElement('div');
+        bx1cimport.className = 'bx1cimport';
+        document.body.append(bx1cimport);
+        $('.bx1cimport').append('<div id="divheader">Скрипт отладки интеграции с 1C через xml</div>');
+        $('.bx1cimport').append('<button class="btn1" id="closeform"><i class="fa fa-close"></i></button>');
+        $('.bx1cimport').append('<div id="div1ccontent"style="display: flex">');
+        var logimport = document.createElement('div');
+        logimport.className = 'logimport';
+        $('#div1ccontent').append(logimport);
 
-    var managepanel = document.createElement('div');
-    managepanel.className = 'managepanel';
-    $('#div1ccontent').append(managepanel);
+        var managepanel = document.createElement('div');
+        managepanel.className = 'managepanel';
+        $('#div1ccontent').append(managepanel);
 
-    //$('.bx1cimport').append('<button id="closeform" class="bx1cimportclose">Закрыть</button>');
-    $('#closeform').bind( 'click', closeform );
-    $('.managepanel').append('<hr><label><strong>Импорт xml товаров,заказов,контрагентов</strong></label></br></br>');
-    managepanel.innerHTML+='<input type="text" id="domain" value="nowhost()"><label>Домен</label></br>';
-    managepanel.innerHTML+='<input type="text" id="filename"><label for="filename">Файл импорта</label></br>';
+        //$('.bx1cimport').append('<button id="closeform" class="bx1cimportclose">Закрыть</button>');
+        $('#closeform').bind( 'click', closeForm );
+        $('.managepanel').append('<hr><label><strong>Импорт xml товаров,заказов,контрагентов,пользователей</strong></label></br></br>');
+        managepanel.innerHTML+='<input type="text" id="domain" value="nowhost()"><label>Домен</label></br>';
+        managepanel.innerHTML+='<input type="text" id="filename"><label for="filename">Файл импорта</label></br>';
 
-    var importbutton = document.createElement('button');
-    //importbutton.type = 'button';
-    //importbutton.value= 'Импорт';
-    importbutton.className= 'btn2';
-    importbutton.textContent= 'Импорт';
-    managepanel.append(importbutton);
-    importbutton.onclick = function(){ajaximportxml()}
-    $('.managepanel').append('<hr><label><strong>Получения xml заказов версии 3.1</strong></label><br><br><button class="btn2" id="getorder">Получить xml</button></br><hr>');
-    $('#getorder').bind( 'click', getorderxml1c );
-    $('.managepanel').append('<hr><label><strong>Получения xml каталога товаров</strong></label><br><br><button class="btn2" id="getprod">Получить xml товаров</button></br><hr>');
-    $('#getprod').bind( 'click', getprodxml1c );
-    $('.managepanel').append('</br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
-    $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
+        var importbutton = document.createElement('button');
+        //importbutton.type = 'button';
+        //importbutton.value= 'Импорт';
+        importbutton.className= 'btn2';
+        importbutton.textContent= 'Импорт';
+        managepanel.append(importbutton);
+        importbutton.onclick = function(){ajaxImportxml()}
+        $('.managepanel').append('<hr><label><strong>Получения xml заказов версии 3.1</strong></label><br><br><button class="btn2" id="getorder">Получить xml</button></br><hr>');
+        $('#getorder').bind( 'click', getOrderXml1c );
+        $('.managepanel').append('<hr><label><strong>Получения xml каталога товаров</strong></label><br><br><button class="btn2" id="getprod">Получить xml товаров</button></br><hr>');
+        $('#getprod').bind( 'click', getProdXml1c );
+        $('.managepanel').append('</br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
+        $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
 
-//определение типа импорта
-    function ajaximportxml(){
-if (document.getElementById('filename').value.substr(0, 5) == "order"||document.getElementById('filename').value.substr(0, 11) == "contragents"||document.getElementById('filename').value.substr(0, 9) == "documents")
-    {importorderxml1c();}
-    else {importprodxml1c();}}
-
-    function bxFormimport1c() {
-        if(document.getElementsByClassName('bx1cimport')[0].style.display !== 'block'){
-            document.getElementsByClassName('bx1cimport')[0].style.display = 'block';
-            dragElement(document.getElementsByClassName('bx1cimport')[0]);
-        }
-        else{
-            document.getElementsByClassName('bx1cimport')[0].style.display = 'none'}
-    }
-
-    function closeform() {
-        document.getElementsByClassName('bx1cimport')[0].style.display = 'none';
-    }
-
-    document.getElementsByClassName('BX1cimportHelp')[0].addEventListener('click', function(event) {
-        bxFormimport1c();});
-    document.getElementById('domain').value=document.location.hostname;
-
-    function dragElement(elmnt) {
-        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-        if (document.getElementById("divheader")) {
-            /* if present, the header is where you move the DIV from:*/
-            document.getElementById("divheader").onmousedown = dragMouseDown;
-        } else {
-            /* otherwise, move the DIV from anywhere inside the DIV:*/
-            elmnt.onmousedown = dragMouseDown;
-        }
-
-        function dragMouseDown(e) {
-            e = e || window.event;
-            // get the mouse cursor position at startup:
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            // call a function whenever the cursor moves:
-            document.onmousemove = elementDrag;
-        }
-
-        function elementDrag(e) {
-            e = e || window.event;
-            // calculate the new cursor position:
-            pos1 = pos3 - e.clientX;
-            pos2 = pos4 - e.clientY;
-            pos3 = e.clientX;
-            pos4 = e.clientY;
-            // set the element's new position:
-            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-        }
-
-        function closeDragElement() {
-            /* stop moving when mouse button is released:*/
-            document.onmouseup = null;
-            document.onmousemove = null;
-        }
-    }
-    function query(url,login,pass) // Функция отправки запроса
-    {
-        var import_1c = new XMLHttpRequest();
-        console.log(url+' '+login+' '+pass);
-        import_1c.open('GET', url, false, login, pass);
-        import_1c.onreadystatechange = function () {
-            if (import_1c.readyState == 4 && import_1c.status == 0) {
-                alert("Import is crashed!" + url);
+        //определение типа импорта
+        function ajaxImportxml(){
+            if (document.getElementById('filename').value.substr(0, 5) == "order"||document.getElementById('filename').value.substr(0, 11) == "contragents"||document.getElementById('filename').value.substr(0, 9) == "documents")
+            {
+                importOrderXml1c();
             }
-            if (import_1c.readyState == 4 && import_1c.status == 200) {
-                console.log(import_1c.responseText);
-                res=import_1c.responseText;
+            else if (document.getElementById('filename').value.substr(0, 7) == "company")
+            {
+                importUser1C();
+            }
+            else
+            {
+                importProdxml1c();
             }
         }
-        import_1c.send(null);
-        return res;
-    }
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
 
-    async function importprodxml1c() {
-        $("div.logimport").empty();
-        var domain = document.getElementById('domain').value;
-        var login = '';//document.getElementById('login').value;
-        var password = '';//document.getElementById('password').value;
-        var filename = document.getElementById('filename').value;
-        var importurl=location.protocol + '//'  + domain + '/bitrix/admin/1c_exchange.php?type=catalog&mode=checkauth';
-        var log = document.getElementsByClassName('logimport')[0];
-        var sessid1c;
-        log.innerHTML += "Импорт файла" + filename + "<hr>";
-        sessid1c=query(importurl,login,password);
-        await sleep(1000);
-        log.innerHTML += sessid1c+'<hr>';
-        if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
-            alert("error"); return;
+        function bxFormImport1c() {
+            if(document.getElementsByClassName('bx1cimport')[0].style.display !== 'block'){
+                document.getElementsByClassName('bx1cimport')[0].style.display = 'block';
+                dragElement(document.getElementsByClassName('bx1cimport')[0]);
+            }
+            else{
+                document.getElementsByClassName('bx1cimport')[0].style.display = 'none'}
         }
-        sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
-        console.log(sessid1c);
-        let status=true;
-        while (status) {
-            url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=catalog&mode=import&' + sessid1c + '&filename=' + filename;
-            result = query(url, '', '');
-            await sleep(1000);
-            log.innerHTML += result + '<hr>';
-            console.log(result.substr(0, 8));
-            if ((result.substr(0, 8) == "progress")||(result.substr(0, 7) == "success")) {
-                console.log(result.indexOf("Импорт успешно завершен.", 0));
-                if (result.indexOf("Импорт успешно завершен.", 0) !== -1) {
-                    status = false;
-                    console.log('end');
+
+        function closeForm() {
+            document.getElementsByClassName('bx1cimport')[0].style.display = 'none';
+        }
+
+        document.getElementsByClassName('BX1cimportHelp')[0].addEventListener('click', function(event) {
+            bxFormImport1c();});
+        document.getElementById('domain').value=document.location.hostname;
+
+        function dragElement(elmnt) {
+            var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            if (document.getElementById("divheader")) {
+                /* if present, the header is where you move the DIV from:*/
+                document.getElementById("divheader").onmousedown = dragMouseDown;
+            } else {
+                /* otherwise, move the DIV from anywhere inside the DIV:*/
+                elmnt.onmousedown = dragMouseDown;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                // call a function whenever the cursor moves:
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                // calculate the new cursor position:
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // set the element's new position:
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                /* stop moving when mouse button is released:*/
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        function query(url,login,pass) // Функция отправки запроса
+        {
+            var res = null;
+            var import_1c = new XMLHttpRequest();
+            console.log(url+' '+login+' '+pass);
+            import_1c.open('GET', url, false, login, pass);
+            import_1c.onreadystatechange = function () {
+                if (import_1c.readyState == 4 && import_1c.status == 0) {
+                    alert("Import is crashed!" + url);
+                }
+                if (import_1c.readyState == 4 && import_1c.status == 200) {
+                    console.log(import_1c.responseText);
+                    res=import_1c.responseText;
                 }
             }
-            else {alert("error"); return;}
+            import_1c.send(null);
+            return res;
         }
 
-    }
-
-    async function getorderxml1c() {
-        $("div.logimport").empty();
-        var domain = document.getElementById('domain').value;
-        var login = '';//document.getElementById('login').value;
-        var password = '';//document.getElementById('password').value;
-        var url=location.protocol + '//'  + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=checkauth';
-        var log = document.getElementsByClassName('logimport')[0];
-        var sessid1c;
-        log.innerHTML += "Получение xml заказа<hr>";
-        sessid1c=query(url,login,password);
-        await sleep(1000);
-        log.innerHTML += sessid1c+'<hr>';
-        if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
-            alert("error"); return;
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
         }
-        sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
-        console.log(sessid1c);
 
-        url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=init&' + sessid1c + '&version=3.1';
-        console.log(url);
-        result = query(url, '', '');
-        await sleep(1000);
-        log.innerHTML += result + '<hr>';
-        console.log(result.substr(0, 8));
-        if ((result.substr(0, 6) == "zip=no")||(result.substr(0, 7) == "zip=yes")) {
-            log.innerHTML += "Инициализация успешна" + '<hr>';
-            url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=query&' + sessid1c + '&version=3.1';
+        async function importProdxml1c() {
+            var result = null;
+            var url = null;
+            $("div.logimport").empty();
+            var domain = document.getElementById('domain').value;
+            var login = '';//document.getElementById('login').value;
+            var password = '';//document.getElementById('password').value;
+            var filename = document.getElementById('filename').value;
+            var importurl=location.protocol + '//' + domain + '/bitrix/admin/1c_exchange.php?type=catalog&mode=checkauth';
+            var log = document.getElementsByClassName('logimport')[0];
+            var sessid1c;
+            log.innerHTML += "Импорт файла " + filename + "<hr>";
+            sessid1c=query(importurl,login,password);
+            await sleep(1000);
+            log.innerHTML += sessid1c+'<hr>';
+            if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
+                alert("error"); return;
+            }
+            sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
+            console.log(sessid1c);
+            let status=true;
+            while (status) {
+                url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=catalog&mode=import&' + sessid1c + '&filename=' + filename;
+                result = query(url, '', '');
+                await sleep(1000);
+                log.innerHTML += result + '<hr>';
+                console.log(result.substr(0, 8));
+                if ((result.substr(0, 8) == "progress")||(result.substr(0, 7) == "success")) {
+                    console.log(result.indexOf("Импорт успешно завершен.", 0));
+                    if (result.indexOf("Импорт успешно завершен.", 0) !== -1) {
+                        status = false;
+                        console.log('end');
+                    }
+                }
+                else {alert("error"); return;}
+            }
+
+        }
+
+        async function getOrderXml1c() {
+            var result = null;
+            $("div.logimport").empty();
+            var domain = document.getElementById('domain').value;
+            var login = '';//document.getElementById('login').value;
+            var password = '';//document.getElementById('password').value;
+            var url=location.protocol + '//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=checkauth';
+            var log = document.getElementsByClassName('logimport')[0];
+            var sessid1c;
+            log.innerHTML += "Получение xml заказа<hr>";
+            sessid1c=query(url,login,password);
+            await sleep(1000);
+            log.innerHTML += sessid1c+'<hr>';
+            if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
+                alert("error"); return;
+            }
+            sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
+            console.log(sessid1c);
+
+            url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=init&' + sessid1c + '&version=3.1';
             console.log(url);
             result = query(url, '', '');
             await sleep(1000);
-            log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
-        }
-        return;
-    }
-
-     async function importorderxml1c() {
-        $("div.logimport").empty();
-        var domain = document.getElementById('domain').value;
-        var login = '';//document.getElementById('login').value;
-        var password = '';//document.getElementById('password').value;
-        var filename = document.getElementById('filename').value;
-        var importurl=location.protocol + '//'  + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=checkauth';
-        var log = document.getElementsByClassName('logimport')[0];
-        var sessid1c;
-        log.innerHTML += "Импорт файла" + filename + "<hr>";
-        sessid1c=query(importurl,login,password);
-        await sleep(1000);
-        log.innerHTML += sessid1c+'<hr>';
-        if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
-            alert("error"); return;
-        }
-        sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
-        console.log(sessid1c);
-        let status=true;
-        while (status) {
-            url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=import&' + sessid1c + '&filename=' + filename;
-            result = query(url, '', '');
-            await sleep(1000);
             log.innerHTML += result + '<hr>';
-            if ((result.substr(0, 8) == "progress")||(result.substr(0, 7) == "success")) {
-                    status = false;
-                    console.log('end');
-            }
-            else {alert("error"); return;}
-        }
-
-    }
-
-        async function getprodxml1c() {
-        $("div.logimport").empty();
-        var domain = document.getElementById('domain').value;
-        var login = '';//document.getElementById('login').value;
-        var password = '';//document.getElementById('password').value;
-        var url=location.protocol + '//'  + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=checkauth';
-        var log = document.getElementsByClassName('logimport')[0];
-        var sessid1c;
-        log.innerHTML += "Получение xml каталога для выгрузки в 1С<hr>";
-       /* sessid1c=query(url,login,password);
-        await sleep(1000);
-        log.innerHTML += sessid1c+'<hr>';
-        if ((sessid1c.substr(0, 8) != "progress") || (sessid1c.substr(0, 7) != "success") || (sessid1c.substr(0, 5) != "debug")) {
-            alert("error"); return;
-        }
-*/
-        url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=init';
-        console.log(url);
-        result = query(url, '', '');
-        await sleep(1000);
-        log.innerHTML += result + '<hr>';
-        console.log(result.substr(0, 8));
-        let status=true;
-        while (status) {
-            url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=query';
-            result = query(url, '', '');
-            await sleep(1000);
-            log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
             console.log(result.substr(0, 8));
-            if ((result.substr(0, 17) == "С сайта выгружено")||(result.substr(0, 12) == "finished=yes")) {
-                if (result.indexOf("finished=yes", 0) !== -1) {
+            if ((result.substr(0, 6) == "zip=no")||(result.substr(0, 7) == "zip=yes")) {
+                log.innerHTML += "Инициализация успешна" + '<hr>';
+                url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=query&' + sessid1c + '&version=3.1';
+                console.log(url);
+                result = query(url, '', '');
+                await sleep(1000);
+                log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
+            }
+            return;
+        }
+
+        async function importOrderXml1c() {
+            var result = null;
+            var url = null;
+            $("div.logimport").empty();
+            var domain = document.getElementById('domain').value;
+            var login = '';//document.getElementById('login').value;
+            var password = '';//document.getElementById('password').value;
+            var filename = document.getElementById('filename').value;
+            var importurl=location.protocol + '//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=checkauth';
+            var log = document.getElementsByClassName('logimport')[0];
+            var sessid1c;
+            log.innerHTML += "Импорт файла " + filename + "<hr>";
+            sessid1c=query(importurl,login,password);
+            await sleep(1000);
+            log.innerHTML += sessid1c+'<hr>';
+            if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
+                alert("error"); return;
+            }
+            sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
+            console.log(sessid1c);
+            let status=true;
+            while (status) {
+                url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=sale&mode=import&' + sessid1c + '&filename=' + filename;
+                result = query(url, '', '');
+                await sleep(1000);
+                log.innerHTML += result + '<hr>';
+                if ((result.substr(0, 8) == "progress")||(result.substr(0, 7) == "success")) {
                     status = false;
                     console.log('end');
                 }
+                else {alert("error"); return;}
             }
-            else {alert("error"); return;}
+
+        }
+
+        async function getProdXml1c() {
+            var result = null;
+            $("div.logimport").empty();
+            var domain = document.getElementById('domain').value;
+            var login = '';//document.getElementById('login').value;
+            var password = '';//document.getElementById('password').value;
+            var url=location.protocol + '//' + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=checkauth';
+            var log = document.getElementsByClassName('logimport')[0];
+            var sessid1c;
+            log.innerHTML += "Получение xml каталога для выгрузки в 1С<hr>";
+            /* sessid1c=query(url,login,password);
+             await sleep(1000);
+             log.innerHTML += sessid1c+'<hr>';
+             if ((sessid1c.substr(0, 8) != "progress") || (sessid1c.substr(0, 7) != "success") || (sessid1c.substr(0, 5) != "debug")) {
+                 alert("error"); return;
+             }
+     */
+            url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=init';
+            console.log(url);
+            result = query(url, '', '');
+            await sleep(1000);
+            log.innerHTML += result + '<hr>';
+            console.log(result.substr(0, 8));
+            let status=true;
+            while (status) {
+                url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=get_catalog&mode=query';
+                result = query(url, '', '');
+                await sleep(1000);
+                log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
+                console.log(result.substr(0, 8));
+                if ((result.substr(0, 17) == "С сайта выгружено")||(result.substr(0, 12) == "finished=yes")) {
+                    if (result.indexOf("finished=yes", 0) !== -1) {
+                        status = false;
+                        console.log('end');
+                    }
+                }
+                else {alert("error"); return;}
+            }
+        }
+
+        async function importUser1C() {
+            var result = null;
+            var url = null;
+            $("div.logimport").empty();
+            var domain = document.getElementById('domain').value;
+            var login = '';//document.getElementById('login').value;
+            var password = '';//document.getElementById('password').value;
+            var importurl=location.protocol + '//' + domain + '/bitrix/admin/1c_intranet.php?mode=checkauth';
+            var filename = document.getElementById('filename').value;
+            var log = document.getElementsByClassName('logimport')[0];
+            var sessid1c;
+            log.innerHTML += "Импорт файла " + filename + "<hr>";
+            sessid1c=query(importurl,login,password);
+            await sleep(1000);
+            log.innerHTML += sessid1c+'<hr>';
+            if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
+                alert("error");
+                return;
+            }
+            sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
+            console.log(sessid1c);
+            let status=true;
+            while (status) {
+                url = location.protocol+'//' + domain + '/bitrix/admin/1c_intranet.php?&mode=import&' + sessid1c + '&filename=' + filename;
+                result = query(url, '', '');
+                await sleep(1000);
+                log.innerHTML += result + '<hr>';
+                console.log(result.substr(0, 8));
+                if ((result.substr(0, 8) == "progress")||(result.substr(0, 7) == "success")) {
+                    console.log(result.indexOf("Импорт успешно завершен.", 0));
+                    if (result.indexOf("Импорт успешно завершен.", 0) !== -1) {
+                        status = false;
+                        console.log('end');
+                    }
+                }
+                else {alert("error"); return;}
+            }
         }
     }
-
-}
 )
+
