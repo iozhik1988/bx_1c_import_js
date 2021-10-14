@@ -74,7 +74,8 @@ $(document).ready(function() {
         $('.managepanel').append('<hr><label><strong>Получения xml каталога товаров</strong></label><br><br><button class="btn2" id="getprod">Получить xml товаров</button></br><hr>');
         $('#getprod').bind( 'click', getProdXml1c );
         $('.managepanel').append('</br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
-        $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');          $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_file_view.php?path=%2Fbitrix%2Fmodules%2Fintranet%2Fcml2-import-user.log&lang=ru\'">Лог импорта пользователей 1С КП</button>');
+        $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
+        $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_file_view.php?path=%2Fbitrix%2Fmodules%2Fintranet%2Fcml2-import-user.log&lang=ru\'">Лог импорта пользователей 1С КП</button>');
     
         //определение типа импорта
         function ajaxImportxml(){
