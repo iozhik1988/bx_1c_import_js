@@ -71,7 +71,7 @@ $(document).ready(function() {
         $('#closeform').bind( 'click', closeForm );
         $('.managepanel').append('<hr><label><strong>Импорт xml товаров,заказов,контрагентов,пользователей</strong></label></br></br>');
         managepanel.innerHTML+='<input type="text" id="domain" value="nowhost()"><label>Домен</label></br>';
-        managepanel.innerHTML+='<input type="text" id="filename"><label for="filename">Файл импорта</label></br>';
+        managepanel.innerHTML+='<input type="text" id="filename" title="Файл должен начинатся:&#013;товары - import, offers, price, rests, references&#013;заказы - documents&#013;пользователи - company"><label for="filename">Файл импорта</label></br>';
 
         var importbutton = document.createElement('button');
         //importbutton.type = 'button';
@@ -97,6 +97,10 @@ $(document).ready(function() {
             else if (document.getElementById('filename').value.substr(0, 7) == "company")
             {
                 importUser1C();
+            }
+            else if (document.getElementById('filename').value.substr(0, 10) == "references")
+            {
+                importReferenceXml1c();
             }
             else
             {
@@ -199,7 +203,7 @@ $(document).ready(function() {
             await sleep(1000);
             log.innerHTML += sessid1c+'<hr>';
             if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
-                alert("error"); return;
+                alert("error: "+sessid1c); return;
             }
             sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
             console.log(sessid1c);
@@ -217,7 +221,7 @@ $(document).ready(function() {
                         console.log('end');
                     }
                 }
-                else {alert("error"); return;}
+                else {alert("error: "+result); return;}
             }
 
         }
@@ -236,7 +240,7 @@ $(document).ready(function() {
             await sleep(1000);
             log.innerHTML += sessid1c+'<hr>';
             if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
-                alert("error"); return;
+                alert("error: "+sessid1c); return;
             }
             sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
             console.log(sessid1c);
@@ -274,7 +278,7 @@ $(document).ready(function() {
             await sleep(1000);
             log.innerHTML += sessid1c+'<hr>';
             if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
-                alert("error"); return;
+                alert("error: "+sessid1c); return;
             }
             sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
             console.log(sessid1c);
@@ -288,7 +292,7 @@ $(document).ready(function() {
                     status = false;
                     console.log('end');
                 }
-                else {alert("error"); return;}
+                else {alert("error: "+result); return;}
             }
 
         }
@@ -329,7 +333,7 @@ $(document).ready(function() {
                         console.log('end');
                     }
                 }
-                else {alert("error"); return;}
+                else {alert("error: "+result); return;}
             }
         }
 
@@ -349,7 +353,7 @@ $(document).ready(function() {
             await sleep(1000);
             log.innerHTML += sessid1c+'<hr>';
             if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
-                alert("error");
+                alert("error: "+sessid1c);
                 return;
             }
             sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
@@ -368,8 +372,47 @@ $(document).ready(function() {
                         console.log('end');
                     }
                 }
-                else {alert("error"); return;}
+                else {alert("error: "+result); return;}
             }
+        }
+
+    async function importReferenceXml1c() {
+            var result = null;
+            var url = null;
+            $("div.logimport").empty();
+            var domain = document.getElementById('domain').value;
+            var login = '';//document.getElementById('login').value;
+            var password = '';//document.getElementById('password').value;
+            var filename = document.getElementById('filename').value;
+            var importurl=location.protocol + '//' + domain + '/bitrix/admin/1c_exchange.php?type=reference&mode=checkauth';
+            var log = document.getElementsByClassName('logimport')[0];
+            var sessid1c;
+            log.innerHTML += "Импорт файла " + filename + "<hr>";
+            sessid1c=query(importurl,login,password);
+            await sleep(1000);
+            log.innerHTML += sessid1c+'<hr>';
+            if ((sessid1c.substr(0, 8) != "progress") && (sessid1c.substr(0, 7) != "success") && (sessid1c.substr(0, 5) != "debug")) {
+                alert("error: "+sessid1c); return;
+            }
+            sessid1c=sessid1c.substr(sessid1c.indexOf('sessid', 0), 39);
+            console.log(sessid1c);
+            let status=true;
+            while (status) {
+                url = location.protocol+'//' + domain + '/bitrix/admin/1c_exchange.php?type=reference&mode=import&' + sessid1c + '&filename=' + filename;
+                result = query(url, '', '');
+                await sleep(1000);
+                log.innerHTML += result + '<hr>';
+                console.log(result.substr(0, 8));
+                if ((result.substr(0, 8) == "progress")||(result.substr(0, 7) == "success")) {
+                    console.log(result.indexOf("Импорт успешно завершен.", 0));
+                    if (result.indexOf("Импорт успешно завершен.", 0) !== -1) {
+                        status = false;
+                        console.log('end');
+                    }
+                }
+                else {alert("error: "+result); return;}
+            }
+
         }
     }
 )
