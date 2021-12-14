@@ -5,7 +5,8 @@
 // @description  Помощник импорта xml файлов 1с
 // @downloadURL  https://github.com/iozhik1988/bx_1c_import_js/blob/main/BX1cimportHelp.user.js
 // @author       Yury Smirnov
-// @match        */bitrix/admin/*
+// @match        */bitrix/admin/fileman_admin.php*
+// @match        */bitrix/admin/1c_admin.php*
 // @exclude      /(^[^:\/#\?]*:\/\/([^#\?\/]*\.)?dev\.1c-bitrix\.ru(:[0-9]{1,5})?\/.*$)/
 // @exclude      /(^[^:\/#\?]*:\/\/([^#\?\/]*\.)?www\.1c-bitrix\.ru(:[0-9]{1,5})?\/.*$)/
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
