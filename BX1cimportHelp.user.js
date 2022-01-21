@@ -88,21 +88,22 @@ $(document).ready(function() {
         importbutton.textContent= 'Импорт';
         managepanel.append(importbutton);
         importbutton.onclick = function(){ajaxImportxml();}
-        $('.managepanel').append('<hr><label><strong>Получения xml заказов версии 3.1</strong></label><br><br><button class="btn2" id="getorder">Получить xml</button><button class="btn2 btn3"  style="display: none;" id="downloadAsFile">Скачать XML</button></br>');
+        $('.managepanel').append('<hr><label><strong>Получения xml заказов версии 3.1</strong></label><br><br><button class="btn2" id="getorder">Получить xml</button><button class="btn2 btn3"  style="display: none;" id="downloadAsFileXmlOrder">Скачать XML</button></br>');
         $('#getorder').bind( 'click', getOrderXml1c );
-        $('.managepanel').append('<hr><label><strong>Получения xml каталога товаров</strong></label><br><br><button class="btn2" id="getprod">Получить xml товаров</button></br><hr>');
+        $('.managepanel').append('<hr><label><strong>Получения xml каталога товаров</strong></label><br><br><button class="btn2" id="getprod">Получить xml товаров</button><button class="btn2 btn3"  style="display: none;" id="downloadAsFileXmlProd">Скачать XML товаров</button></br><hr>');
         $('#getprod').bind( 'click', getProdXml1c );
         $('.managepanel').append('</br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
         $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
         $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_file_view.php?path=%2Fbitrix%2Fmodules%2Fintranet%2Fcml2-import-user.log&lang=ru\'">Лог импорта пользователей 1С КП</button>');
-        $('#downloadAsFile').bind( 'click', downloadAsFile );
+        $('#downloadAsFileXmlOrder').bind( 'click', downloadAsFile );
+        $('#downloadAsFileXmlProd').bind( 'click', downloadAsFile );
 
         // скачасть xml файл
         function downloadAsFile() {
             let a = document.createElement("a");
             let file = new Blob([window.responsBx1CHepl.response], {type: 'application/xml'});
             a.href = URL.createObjectURL(file);
-            a.download = "order_xml_site.xml";
+            a.download = "xml_site.xml";
             a.click();
         }
 
@@ -277,7 +278,7 @@ $(document).ready(function() {
                 await sleep(1000);
                 log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
                 window.responsBx1CHepl={response: result};
-                document.getElementById('downloadAsFile').style.display = ''
+                document.getElementById('downloadAsFileXmlOrder').style.display = ''
             }
             return;
         }
@@ -346,6 +347,8 @@ $(document).ready(function() {
                 result = query(url, '', '');
                 await sleep(1000);
                 log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
+                window.responsBx1CHepl={response: result};
+                document.getElementById('downloadAsFileXmlProd').style.display = ''
                 console.log(result.substr(0, 8));
                 if ((result.substr(0, 17) == "С сайта выгружено")||(result.substr(0, 12) == "finished=yes")) {
                     if (result.indexOf("finished=yes", 0) !== -1) {
