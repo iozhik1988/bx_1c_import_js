@@ -36,6 +36,7 @@ function addGlobalLink(urlLink) {
     link.href = urlLink;
     head.appendChild(link);
 }
+
 // #a5b557 зеленый цвет панели Битрикс
 addGlobalStyle('.BX1cimportHelp { cursor: pointer;position:fixed;bottom:40px;right:0px;font-size:24px;width: 30px;height: 30px;background:hsl(0,0%,500%) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAABmJLR0QA/wD/AP+gvaeTAAAFc0lEQVRoge2YX2xTdRTHv+fedq0OJmwkgkLE+GDISCRRSLeWeLvWNdsgCDp9ISZGlECIU3wgwQiNL0g0YgJqMEh8wRhroiOyZcu6VkbXintwCTwYBQkDCUY2HULL7f31+MA6773707txOzXez9s5v9/5nd+35/7+FXBwcHBwcHBwcHBwcHCYCJkd6VCIrQTWxeMTYq1wyu+fL3k86wgIgmgVmJeDaAEAgPl3EP0M5kEi6tVyuROBVOr6bPJMxZwJHohEluSF2APm5wDcbTHsJoBPWYj99cnkTzPJNxVlF9zR1ORZoKqvE7ATQOUM51ckD6J3R9zuvc2dnbdmOQYAQLqT4FIMKMqialXtJuANzF4sALjBvKtaVROnFWXxnczJ8mdprnypCqcaG1dKQnQAWDZJ8xCI2pn5BGT5QiUwBAA3gGWkaQ8yUQsBGwAsnST2YkGWW/zd3Weszl1PWQRnQqF7GfgOE8VeJqI3s5p2NJhMatPl42hUSp88+RQRvQ3gAVPzRQLW+OLxq1bnX4RKrdmiMKuCE4rivUuWexmoM2ai4yKb3TzTXfeU3z9f9nqPAVhvaGBOjXg8oZmuadvXsEeWd08Qy3zQFwhsnM0RE0ilrvvWrn0SRIcMDUT+alXdO9PxbK3wQCSyJK9pP0K/QREd9wUCGykaLej7phobV5IQWwCECVgOAAxcANDDsnzEvEY5GpUyfX1fwVhp1UW0YnVPz3krYgGbK5wXYg+Mu/Flkc1u1os929pakQ6F3peEGCSgjYDasZhKAmoJaJOE+D4dDh8829paUYyjaLRAFRWbGbiiG78iz7xrJnMseQ5brXBCUeZ5ZfkKgHlFHwNb6uPxj/Vi/xge7iSgwdLsmONVNTXNtbGYWnRlwuGXmPmwrteNnBCLg8nkn1aGtK3CHklaD51YAEOXqqs/0fcZHR4+YFksABCFRq9de0fvymraUQCXda5Kr8vVbHVI2wQTEDQ6qP2ZWEwUzVRj40oAW01hQ0T0tMjlqkQuV8XMmwj4wTTO9tPBYG3RHDvO2g1dmC3/iC6rHUtCtMpgFwodhubbG5Sscw2xy7WqrqtrWOf7sj8S+YY0bRB/XzpkQfQCbl9NAQASUUeBeXvRZnPuabBz03rQMDDROb1NwBMGm+jVeqNYAEB9V9cwM+80uQ2xQpIMY4PZkHs67BRcpTduCvGLqd1w69Ky2e4pJ+XxdBkcRIab1i1VvWQKucfqJO37pE248/lZvZcBwNfZOYpprr1jO/KsxrezwqN6w+31LjG1DxkSezxhG3Nbxk7BhttOgfkhvU1Ehk9YItrXH4lU25jfEvYJZh40mEQthkRCHAEwfkwx8DBp2mB/Q0NrpqnJsP7LiW1rmIh6GXhx3AY2JBTlleIzcE0icTYdDn8I5h26sKVE9DmrKtKhkF1TmRbbKpwV4msA+uvdUq/L9by+T9XCha+BOW5Xztlgm+CxnfMzg5M5esrvn180a2MxtaqmphnMB6H7vOcSW19LLMR+AHmd6z7Z6z3G0eh4ntpYTK3r7X1ZLhQeAfMBMJ+B8csoK7a9lsbjw+G3YH6yER3yBQJt5jfxP4Ht/3iMuN17AfQbnMw7Mn197XO5G0+F7YKbOztvEbAJwEVT0zpW1XOZUKgtoShlu+GVoiz/S/vi8asFWW7BRNGLGHjPK8sX0g0NH2SCweZ0OLwioSjzJhunHJTtl/Z3d58ZUJRH85L0BYgeNzXfD6JtTLQNzPDK8n/vHJ6Mx5LJ30Y8nggB+wCoJQPmgLIKBm6vaV88vttFtIKBjwDcKHfO6Si74CKre3rO18fjW3NCLAbRswQcBtG3AH7Fv6T6Dg4ODg4ODg4ODg4O/1/+AvwlEbSKvmPfAAAAAElFTkSuQmCC) no-repeat;background-size: 90% 90%;box-shadow: 0px 0px 5px black;padding:5px;border-radius:10px 0 0 0;z-index:999999 }.BX1cimportHelp:hover:after{white-space:nowrap;background:#333;background:rgba(0,0,0,.8);border-radius:5px;bottom:35px;color:#fff;content:attr(title);right:0%;padding:5px 15px;position:absolute;z-index:98;width:auto;font-size:12px}.BX1cimportHelp:hover:before{border:solid;border-color:#333 transparent;border-width:6px 6px 0 6px;bottom:29px;content:"";left:25%;position:absolute;z-index:99}');
 addGlobalStyle('.bx1cimport {position: absolute;background-color: #f1f1f1;border: 1px solid #d3d3d3;/*text-align: center;*/margin: 0 auto;width:1000px;height:800px;top: 10%;left: 20%;display:none;padding: 5px;border-color: black;border-style: solid;z-index:999999999;background-color: white;}');
@@ -49,8 +50,10 @@ addGlobalStyle('.btn1 {background-color: #2196F3;border: none;color: white;paddi
 addGlobalStyle('.btn1:hover {background-color: RoyalBlue;}');
 addGlobalStyle('.btn2 {background-color: #2196F3;border: none;color: white;padding: 12px 16px;font-size: 13px;cursor: pointer;}');
 addGlobalStyle('.btn2:hover {background-color: RoyalBlue;}');
+addGlobalStyle('.btn3 {background-color: #86ad00;border: none;color: white;padding: 12px 16px;font-size: 13px;cursor: pointer;}');
+addGlobalStyle('.btn3:hover {background-color: #718f0e;}');
 addGlobalLink('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-
+window.responsBx1CHepl = {response:''};
 $(document).ready(function() {
         var icon1cDiv = document.createElement('div');
         icon1cDiv.className = 'BX1cimportHelp';
@@ -85,13 +88,23 @@ $(document).ready(function() {
         importbutton.textContent= 'Импорт';
         managepanel.append(importbutton);
         importbutton.onclick = function(){ajaxImportxml();}
-        $('.managepanel').append('<hr><label><strong>Получения xml заказов версии 3.1</strong></label><br><br><button class="btn2" id="getorder">Получить xml</button></br>');
+        $('.managepanel').append('<hr><label><strong>Получения xml заказов версии 3.1</strong></label><br><br><button class="btn2" id="getorder">Получить xml</button><button class="btn2 btn3"  style="display: none;" id="downloadAsFile">Скачать XML</button></br>');
         $('#getorder').bind( 'click', getOrderXml1c );
         $('.managepanel').append('<hr><label><strong>Получения xml каталога товаров</strong></label><br><br><button class="btn2" id="getprod">Получить xml товаров</button></br><hr>');
         $('#getprod').bind( 'click', getProdXml1c );
         $('.managepanel').append('</br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_admin.php?lang=ru&path=%2Fupload%2F1c_catalog\'">Управление структурой</button>');
         $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/1c_admin.php?lang=ru\'">Настройки интеграции с 1С</button>');
         $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_file_view.php?path=%2Fbitrix%2Fmodules%2Fintranet%2Fcml2-import-user.log&lang=ru\'">Лог импорта пользователей 1С КП</button>');
+        $('#downloadAsFile').bind( 'click', downloadAsFile );
+
+        // скачасть xml файл
+        function downloadAsFile() {
+            let a = document.createElement("a");
+            let file = new Blob([window.responsBx1CHepl.response], {type: 'application/xml'});
+            a.href = URL.createObjectURL(file);
+            a.download = "order_xml_site.xml";
+            a.click();
+        }
 
         //определение типа импорта
         function ajaxImportxml(){
@@ -263,6 +276,8 @@ $(document).ready(function() {
                 result = query(url, '', '');
                 await sleep(1000);
                 log.innerHTML += '<textarea style="width: 582px;height: 586px;">' + result + '</textarea><hr>';
+                window.responsBx1CHepl={response: result};
+                document.getElementById('downloadAsFile').style.display = ''
             }
             return;
         }
