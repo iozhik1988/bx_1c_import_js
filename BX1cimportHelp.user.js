@@ -78,7 +78,7 @@ $(document).ready(function() {
         //$('.bx1cimport').append('<button id="closeform" class="bx1cimportclose">Закрыть</button>');
         $('#closeform').bind( 'click', closeForm );
         $('.managepanel').append('<hr><label><strong>Импорт xml товаров,заказов,контрагентов,пользователей</strong></label></br></br>');
-        managepanel.innerHTML+='<input type="text" id="domain" value="nowhost()"><label>Домен</label></br>';
+        managepanel.innerHTML+='<input type="text" id="domain" value="nowhost()" readonly><label>Домен</label></br>';
         managepanel.innerHTML+='<input type="text" id="filename" title="Файл должен начинатся:&#013;товары - import, offers, price, rests, references&#013;заказы - documents&#013;пользователи - company"><label for="filename">Файл импорта</label></br>';
 
         var importbutton = document.createElement('button');
