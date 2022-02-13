@@ -121,10 +121,11 @@ $(document).ready(function() {
             {
                 importReferenceXml1c();
             }
-            else
+            else if (document.getElementById('filename').value.substr(0, 6) == "import"||document.getElementById('filename').value.substr(0, 5) == "rests"||document.getElementById('filename').value.substr(0, 5) == "price"||document.getElementById('filename').value.substr(0, 6) == "offers"||document.getElementById('filename').value.substr(0, 10) == "references")
             {
                 importProdxml1c();
             }
+            else alert("Неверное имя xml файла");
         }
 
         function bxFormImport1c() {
