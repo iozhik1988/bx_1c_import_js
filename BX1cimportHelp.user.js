@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BX1cimportHelp
 // @namespace    http://bitrix.ru/
-// @version      0.3.1
+// @version      0.4.0
 // @description  Помощник импорта xml файлов 1с
 // @downloadURL  https://github.com/iozhik1988/bx_1c_import_js/blob/main/BX1cimportHelp.user.js
 // @author       Yury Smirnov
@@ -97,8 +97,10 @@ $(document).ready(function() {
         $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_file_view.php?path=%2Fbitrix%2Fmodules%2Fintranet%2Fcml2-import-user.log&lang=ru\'">Лог импорта пользователей 1С КП</button>');
         $('#downloadAsFileXmlOrder').bind( 'click', downloadAsFile );
         $('#downloadAsFileXmlProd').bind( 'click', downloadAsFile );
+        $('#bx-admin-prefix').append('<div style="position: absolute; top: 0px; left: 0px; z-index: 1045 !important; width: 1680px; height: 1319px; display: block;" class="bx-core-dialog-overlay"></div>');
+        document.getElementsByClassName('bx-core-dialog-overlay')[0].style.display = 'none';
 
-        // скачасть xml файл
+    // скачасть xml файл
         function downloadAsFile() {
             let a = document.createElement("a");
             let file = new Blob([window.responsBx1CHepl.response], {type: 'application/xml'});
@@ -140,18 +142,23 @@ $(document).ready(function() {
         function bxFormImport1c() {
             if(document.getElementsByClassName('bx1cimport')[0].style.display !== 'block'){
                 document.getElementsByClassName('bx1cimport')[0].style.display = 'block';
+                document.getElementsByClassName('bx-core-dialog-overlay')[0].style.display = 'block';
                 dragElement(document.getElementsByClassName('bx1cimport')[0]);
             }
             else{
-                document.getElementsByClassName('bx1cimport')[0].style.display = 'none'}
+                document.getElementsByClassName('bx1cimport')[0].style.display = 'none';
+                document.getElementsByClassName('bx-core-dialog-overlay')[0].style.display = 'none';
+            }
         }
 
         function closeForm() {
             document.getElementsByClassName('bx1cimport')[0].style.display = 'none';
+            document.getElementsByClassName('bx-core-dialog-overlay')[0].style.display = 'none';
         }
 
         document.getElementsByClassName('BX1cimportHelp')[0].addEventListener('click', function(event) {
-            bxFormImport1c();});
+            bxFormImport1c();
+              });
         document.getElementById('domain').value=document.location.hostname;
 
         function dragElement(elmnt) {
