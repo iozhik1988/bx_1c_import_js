@@ -109,23 +109,32 @@ $(document).ready(function() {
 
         //определение типа импорта
         function ajaxImportxml(){
-            if (document.getElementById('filename').value.substr(0, 5) == "order"||document.getElementById('filename').value.substr(0, 11) == "contragents"||document.getElementById('filename').value.substr(0, 9) == "documents")
-            {
-                importOrderXml1c();
+            switch (document.getElementById('filename').value.substr(0, 5)) {
+                case "order":
+                case "contra":
+                case "docume":
+                    importOrderXml1c();
+                    break;
+                case "compa":
+                    importUser1C();
+                    break;
+                case "refer":
+                    importReferenceXml1c();
+                    break;
+                case "impor":
+                case "rests":
+                case "price":
+                case "offer":
+                case "goods":
+                case "group":
+                case "price":
+                case "stora":
+                case "units":
+                    importProdxml1c();
+                    break;
+                default:
+                    alert("Неверное имя xml файла");
             }
-            else if (document.getElementById('filename').value.substr(0, 7) == "company")
-            {
-                importUser1C();
-            }
-            else if (document.getElementById('filename').value.substr(0, 10) == "references")
-            {
-                importReferenceXml1c();
-            }
-            else if (document.getElementById('filename').value.substr(0, 6) == "import"||document.getElementById('filename').value.substr(0, 5) == "rests"||document.getElementById('filename').value.substr(0, 5) == "price"||document.getElementById('filename').value.substr(0, 6) == "offers"||document.getElementById('filename').value.substr(0, 10) == "references")
-            {
-                importProdxml1c();
-            }
-            else alert("Неверное имя xml файла");
         }
 
         function bxFormImport1c() {
