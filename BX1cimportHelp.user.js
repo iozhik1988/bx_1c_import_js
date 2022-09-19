@@ -113,8 +113,8 @@ $(document).ready(function() {
         function ajaxImportxml(){
             switch (document.getElementById('filename').value.substr(0, 5)) {
                 case "order":
-                case "contra":
-                case "docume":
+                case "contr":
+                case "docum":
                     importOrderXml1c();
                     break;
                 case "compa":
