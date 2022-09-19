@@ -97,7 +97,7 @@ $(document).ready(function() {
         $('.managepanel').append('</br></br><button class="btn2"  onclick="document.location=\'/bitrix/admin/fileman_file_view.php?path=%2Fbitrix%2Fmodules%2Fintranet%2Fcml2-import-user.log&lang=ru\'">Лог импорта пользователей 1С КП</button>');
         $('#downloadAsFileXmlOrder').bind( 'click', downloadAsFile );
         $('#downloadAsFileXmlProd').bind( 'click', downloadAsFile );
-        $('#bx-admin-prefix').append('<div style="position: absolute; top: 0px; left: 0px; z-index: 1045 !important; width: 1680px; height: 1319px; display: block;" class="bx-core-dialog-overlay"></div>');
+        $('#bx-admin-prefix').append('<div style="position: absolute; top: 0px; left: 0px; z-index: 1045 !important; width: 100%; height: 100%; display: block;" class="bx-core-dialog-overlay"></div>');
         document.getElementsByClassName('bx-core-dialog-overlay')[0].style.display = 'none';
 
     // скачасть xml файл
