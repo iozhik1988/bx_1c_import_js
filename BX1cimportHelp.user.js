@@ -158,6 +158,7 @@ $(document).ready(function() {
         function closeForm() {
             document.getElementsByClassName('bx1cimport')[0].style.display = 'none';
             document.getElementsByClassName('bx-core-dialog-overlay')[0].style.display = 'none';
+            document.getElementById('bx-admin-prefix').style.overflow = 'auto';
         }
 
         document.getElementsByClassName('BX1cimportHelp')[0].addEventListener('click', function(event) {
