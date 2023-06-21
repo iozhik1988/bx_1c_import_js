@@ -341,6 +341,7 @@ $(document).ready(function() {
         }
 
         async function getProdXml1c() {
+            alert('Закомментируйте в файле компонента /bitrix/components/bitrix/catalog.export.1c/component.php:991 условие: if(isset($_SERVER["HTTP_REFERER"])) return;')
             var result = null;
             $("div.logimport").empty();
             var domain = document.getElementById('domain').value;
